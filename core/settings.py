@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Email settings
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST = "<your email host>"
 EMAIL_USE_TLS = False
 EMAIL_PORT = "<your email port>"
@@ -127,10 +127,16 @@ DEFAULT_FROM_EMAIL = "<your default from email>"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ]
 }
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'my-app-auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'my-refresh-token',
+    'JWT_AUTH_HTTPONLY':False,
 
+}
 
 # django-allauth
 # https://django-allauth.readthedocs.io/
@@ -142,8 +148,8 @@ ACCOUNT_MAX_EMAIL_ADDRESSES = 2
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "APP": {
-            "client_id": "<your google client id>",
-            "secret": "<your google secret>",
+            "client_id": "1095769737829-ifqelahubl9tck1n3bhaosq55b1fd2ok.apps.googleusercontent.com",
+            "secret": "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>",
             "key": "",  # leave empty
         },
         "SCOPE": [
